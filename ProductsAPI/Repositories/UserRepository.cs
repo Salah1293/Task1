@@ -34,10 +34,9 @@ namespace ProductsAPI.Repositories
             //            return user;
 
 
-            User user = _context.Users.FirstOrDefault(o =>
-                         string.Equals(o.Email, userDto.Email, StringComparison.OrdinalIgnoreCase) &&
-                         string.Equals(o.Password, userDto.Password));
-                            return user;
+             var user = _context.Users.Where(o => o.Email == userDto.Email &&
+                                o.Password == userDto.Password).FirstOrDefault();
+                                  return user;
 
         }
     }
