@@ -54,8 +54,8 @@ namespace ProductsAPI.Controllers
         public async Task<IActionResult> AddProduct([FromForm] ProductDto dto)
         {
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
+            var userId = User.FindFirstValue("userId");
+            
             var product = _mapper.Map<Product>(dto);
 
              product.Creation_user_id= userId;
@@ -78,7 +78,7 @@ namespace ProductsAPI.Controllers
         public async Task<IActionResult> UpdateAsync(int id, [FromForm] ProductDto dto)
         {
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue("userId");
             var product = await _unitOfWork.Products.GetById(id);
 
            
