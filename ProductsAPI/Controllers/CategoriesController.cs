@@ -46,7 +46,7 @@ namespace ProductsAPI.Controllers
         [Authorize]
         public async Task<IActionResult> CreateAsync([FromForm] CategoryDto dto)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue("userId");
             var category = _mapper.Map<Category>(dto);
 
             category.Creation_user_id = userId;
@@ -67,7 +67,7 @@ namespace ProductsAPI.Controllers
         public async Task<IActionResult> UpdateAsync(int id, [FromForm] CategoryDto dto)
         {
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue("userId");
             var category = await _unitOfWork.Category.GetById(id);
 
             category.ArabicName = dto.ArabicName;
